@@ -1,0 +1,54 @@
+<template>
+    <lightning-card title="Contact search" icon-name="standard:contact">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">
+                <abbr class="slds-required" title="required">* </abbr>Contact First Name</label>
+            <div class="slds-form-element__control">
+                <input value={searchTerm} type="text" id="text-input-id-1" placeholder="" required="" class="slds-input"
+                    onchange={handleChange} />
+            </div>
+            <button onclick={searchContact} class="slds-button slds-button_brand">
+                Search
+            </button>
+            <template if:true={contacts}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset"></tr>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="First Name">First Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Last Name">Last Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        </tr>
+                    </thead>
+                    <template for:each={contacts} for:item="cont">
+                        <tbody key={cont.Id}>
+                            <tr class="slds-hint-parent">
+                                <td data-label="First Name">
+                                    <div class="slds-truncate" title="FirstName">{cont.FirstName}</div>
+                                </td>
+                                <td data-label="Last Name">
+                                    <div class="slds-truncate" title="LastName">{cont.LastName}</div>
+                                </td>
+                                <td data-label="Email">
+                                    <div class="slds-truncate" title="Email">{cont.Email}</div>
+                                </td>
+                                <td data-label="Phone">
+                                    <div class="slds-truncate" title="Phone">{cont.Phone}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </table>
+            </template>
+            <template if:true={errorMsg}>{errorMsg}</template>
+        </div>
+    </lightning-card>
+</template>
