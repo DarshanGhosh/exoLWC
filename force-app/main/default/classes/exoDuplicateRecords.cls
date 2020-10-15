@@ -27,24 +27,6 @@ public with sharing class exoDuplicateRecords {
         }
       }
     }
-    /*
-    query =
-      'SELECT Id, Name FROM ' +
-      objType +
-      ' WHERE Name like \'%' +
-      obj.get('Name') +
-      '%\'';
-    List<SObject> queryResponse = Database.query(query);
-    List<DataTableWrapper> ret = new List<DataTableWrapper>();
-    for (SObject o : queryResponse) {
-      DataTableWrapper objDTW = new DataTableWrapper();
-      if (o.Id != recordId) {
-        objDTW.name = (String) o.get('Name');
-        objDTW.nameUrl = '/' + o.Id;
-        ret.add(objDTW);
-      }
-    }
-    */
     return ret;
   }
 
