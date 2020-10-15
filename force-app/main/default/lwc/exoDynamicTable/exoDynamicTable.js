@@ -1,8 +1,9 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import getData from "@salesforce/apex/ExoDynamicTable.getData";
 export default class ExoDynamicTable extends LightningElement {
-    fields;
-    objName;
+    @api fields;
+    @api objName;
+    @api filter;
     @track items = [];
     @track data = [];
     @track error;
@@ -15,6 +16,7 @@ export default class ExoDynamicTable extends LightningElement {
     @track totalRecountCount = 0;
     @track totalPage = 0;
 
+    /*
     handleFieldChange(event) {
         this.fields = event.detail.value.split(',');
     }
@@ -22,8 +24,10 @@ export default class ExoDynamicTable extends LightningElement {
     handleObjectChange(event) {
         this.objName = event.detail.value;
     }
+    */
 
-    generateTable() {
+    connectedCallback() {
+        this.fields = this.fields.split(',');
         this.columns = [];
         this.data = null;
         this.showTable = false;
@@ -31,7 +35,8 @@ export default class ExoDynamicTable extends LightningElement {
         this.showTable = true;
         getData({
             objName: this.objName,
-            fields: this.fields
+            fields: this.fields,
+            filter: this.filter
         })
             .then((result) => {
                 this.items = result;
