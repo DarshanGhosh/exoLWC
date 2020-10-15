@@ -1,19 +1,5 @@
 <template>
     <lightning-card title="Dynamic Table" icon-name="standard:account">
-        <!--<div>
-            <div class="slds-grid">
-                <div class="slds-col slds-size_1-of-2">
-                    <lightning-input type="text" name="input1" label="Fields to display" onchange={handleFieldChange}>
-                    </lightning-input>
-                </div>
-                <div class="slds-col slds-size_1-of-2">
-                    <lightning-input type="text" name="input1" label="Object" onchange={handleObjectChange}>
-                    </lightning-input>
-                </div>
-            </div>
-        </div> 
-        <button onclick={generateTable} class="slds-button slds-button_brand">Generate Table</button>
-        -->
         <template if:true={showTable}>
             <div class="slds-m-around_medium">
                 <div style="height: 180px;">

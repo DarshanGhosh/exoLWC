@@ -16,16 +16,6 @@ export default class ExoDynamicTable extends LightningElement {
     @track totalRecountCount = 0;
     @track totalPage = 0;
 
-    /*
-    handleFieldChange(event) {
-        this.fields = event.detail.value.split(',');
-    }
-
-    handleObjectChange(event) {
-        this.objName = event.detail.value;
-    }
-    */
-
     connectedCallback() {
         this.fields = this.fields.split(',');
         this.columns = [];
