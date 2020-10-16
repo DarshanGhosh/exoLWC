@@ -1,5 +1,6 @@
 import { LightningElement, track, api } from 'lwc';
 import getData from "@salesforce/apex/ExoDynamicTable.getData";
+import FORM_FACTOR from '@salesforce/client/formFactor';
 export default class ExoDynamicTable extends LightningElement {
     @api fields;
     @api objName;
@@ -8,21 +9,24 @@ export default class ExoDynamicTable extends LightningElement {
     @track data = [];
     @track error;
     @track columns = [];
-    @track showTable = false;
     @track page = 1;
     @track startingRecord = 1;
     @track endingRecord = 0;
-    @track pageSize = 5;
+    @track pageSize;
+    pageSizeDesktop = 5;
+    pageSizeMobile = 3;
     @track totalRecountCount = 0;
     @track totalPage = 0;
+    @track isDesktop;
+
 
     connectedCallback() {
+        this.isDesktop = FORM_FACTOR != 'Large' ? false : true;
+        this.pageSize = FORM_FACTOR != 'Large' ? this.pageSizeMobile : this.pageSizeDesktop;
         this.fields = this.fields.split(',');
         this.columns = [];
         this.data = null;
-        this.showTable = false;
         this.createColumns();
-        this.showTable = true;
         getData({
             objName: this.objName,
             fields: this.fields,
