@@ -10,6 +10,10 @@
             <property name="fields" type="String"/>
             <property name="objName" type="String"/>
             <property name="filter" type="String"/>
+            <supportedFormFactors>
+                <supportedFormFactor type="Small" />
+                <supportedFormFactor type="Large" />
+            </supportedFormFactors>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
