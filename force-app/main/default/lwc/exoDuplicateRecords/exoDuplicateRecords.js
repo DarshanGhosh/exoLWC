@@ -13,7 +13,6 @@ export default class ExoDuplicateRecords extends LightningElement {
     @track pageSize = 5;
     @track totalRecountCount = 0;
     @track totalPage = 0;
-    @track error;
     @track columns = [
         {
             label: 'Name',
