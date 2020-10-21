@@ -7,6 +7,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
+            <property name="fields" type="String"/>
             <supportedFormFactors>
                 <supportedFormFactor type="Small" />
                 <supportedFormFactor type="Large" />

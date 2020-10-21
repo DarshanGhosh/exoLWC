@@ -1,12 +1,13 @@
 public with sharing class exoDuplicateRecords {
   @AuraEnabled(cacheable=true)
-  public static List<DataTableWrapper> getDuplicateRecords(
+  public static List<SObject> getDuplicateRecords(
     Id recordId,
-    String objType
+    String objType,
+    List<String> fields
   ) {
-    String query = 'SELECT Id, Name FROM ' + objType + ' WHERE Id = :recordId';
+    String query = 'SELECT Id FROM ' + objType + ' WHERE Id = :recordId';
     List<SObject> obj = Database.query(query);
-    List<DataTableWrapper> ret = new List<DataTableWrapper>();
+    List<Id> listId = new List<Id>();
     List<Datacloud.FindDuplicatesResult> results = Datacloud.FindDuplicates.findDuplicates(
       obj
     );
@@ -18,22 +19,21 @@ public with sharing class exoDuplicateRecords {
           for (
             Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()
           ) {
-            SObject objPush = matchRecord.getRecord();
-            DataTableWrapper objDTW = new DataTableWrapper();
-            objDTW.name = (String) objPush.get('Name');
-            objDTW.nameUrl = '/' + objPush.Id;
-            ret.add(objDTW);
+            listId.add((Id) matchRecord.getRecord().get('Id'));
           }
         }
       }
     }
-    return ret;
-  }
-
-  private class DataTableWrapper {
-    @AuraEnabled
-    public String nameUrl { get; set; }
-    @AuraEnabled
-    public String name { get; set; }
+    String queryFields = '';
+    for (Integer i = 0; i < fields.size(); i++) {
+      queryFields += i != fields.size() - 1 ? fields[i] + ', ' : fields[i];
+    }
+    String finalQuery =
+      'SELECT ' +
+      queryFields +
+      ' FROM ' +
+      objType +
+      ' WHERE Id in :listId';
+    return Database.query(finalQuery);
   }
 }

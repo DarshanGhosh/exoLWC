@@ -3,41 +3,49 @@ import getDuplicateRecords from "@salesforce/apex/exoDuplicateRecords.getDuplica
 export default class ExoDuplicateRecords extends LightningElement {
     @api recordId;
     @api objectApiName;
+    @api fields;
     @track items = [];
     @track data = [];
     @track error;
-    @track showTable = false;
     @track page = 1;
     @track startingRecord = 1;
     @track endingRecord = 0;
     @track pageSize = 5;
     @track totalRecountCount = 0;
+    @track msgTotalRecordCount = '';
     @track totalPage = 0;
-    @track columns = [
-        {
-            label: 'Name',
-            fieldName: 'nameUrl',
-            type: 'url',
-            typeAttributes: {
-                label: { fieldName: 'name' },
-                target: '_blank'
-            },
-            sortable: true
-        }
-    ];
+    @track isModalOpen = false;
+    @track columns = [];
 
-    @wire(getDuplicateRecords, { recordId: '$recordId', objType: '$objectApiName' })
+    connectedCallback() {
+        this.fields = this.fields.split(',');
+        this.createColumns();
+    }
+
+    @wire(getDuplicateRecords, { recordId: '$recordId', objType: '$objectApiName', fields: '$fields' })
     deWired({ error, data }) {
         if (data) {
+            data = data.map((item) =>
+                Object.assign({}, item, { linkName: '/' + item.Id })
+            );
             this.items = data;
             this.totalRecountCount = data.length;
             this.totalPage = Math.ceil(this.totalRecountCount / this.pageSize);
             this.data = this.items.slice(0, this.pageSize);
             this.endingRecord = this.pageSize;
             this.error = undefined;
+            this.msgTotalRecordCount = this.totalRecountCount != 0 ? 'We found ' + this.totalRecountCount + ' potential duplicate records' : 'We found no potential duplicates for this record';
         } else if (error) {
             this.error = error;
         }
+    }
+
+    displayTable() {
+        this.isModalOpen = true;
+    }
+
+    closeModal() {
+        this.isModalOpen = false;
     }
 
     previousHandler() {
@@ -61,5 +69,26 @@ export default class ExoDuplicateRecords extends LightningElement {
             ? this.totalRecountCount : this.endingRecord;
         this.data = this.items.slice(this.startingRecord, this.endingRecord);
         this.startingRecord = this.startingRecord + 1;
+    }
+
+    createColumns() {
+        var count = 0;
+        this.fields.forEach(element => {
+            if (count == 0) {
+                var item = {
+                    label: element, fieldName: "linkName", type: "url",
+                    typeAttributes: { label: { fieldName: element }, target: "blank" }
+                }
+            } else {
+                var item = {
+                    label: element,
+                    fieldName: element,
+                    type: "text",
+                    sortable: true
+                };
+            }
+            this.columns.push(item);
+            count++;
+        });
     }
 }
