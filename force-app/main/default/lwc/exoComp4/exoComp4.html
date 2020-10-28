@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Grand Parent" icon-name="standard:omni_supervisor">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <div class="slds-text-body_regular">{selectCount} Children selected
+                </div>
+            </div>
+            <div class="slds-col">
+                <button class="slds-button slds-button_brand" onclick={handleReset}>Reset All</button>
+            </div>
+        </div>
+        <c-exo-comp3 onchildchange={hanldeChildChange}></c-exo-comp3>
+    </lightning-card>
+</template>

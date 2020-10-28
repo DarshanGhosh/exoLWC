@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Child One" icon-name="standard:avatar">
+        <template if:false={isSelectedChild1}>
+            <button class="slds-button slds-button_success" onclick={handleClick}>Select</button>
+        </template>
+        <template if:true={isSelectedChild1}>
+            <button class="slds-button slds-button_destructive" onclick={handleClick}>Deselect</button>
+        </template>
+    </lightning-card>
+</template>

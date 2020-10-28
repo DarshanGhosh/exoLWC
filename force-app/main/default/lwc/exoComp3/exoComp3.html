@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Parent" icon-name="standard:person_account">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <div class="slds-text-body_regular">Child One : {statusChild1}
+                </div>
+                <c-exo-comp1 onchild1change={hanldeOnchild1Change}></c-exo-comp1>
+            </div>
+            <div class="slds-col">
+                <div class="slds-text-body_regular">Child Two : {statusChild2}</div>
+                <c-exo-comp2 onchild2change={hanldeOnchild2Change}></c-exo-comp2>
+            </div>
+        </div>
+    </lightning-card>
+</template>
