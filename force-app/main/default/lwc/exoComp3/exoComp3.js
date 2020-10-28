@@ -15,34 +15,21 @@ export default class ExoComp3 extends LightningElement {
 
     hanldeOnchild1Change(event) {
         this.isSelectedChild1 = event.detail;
-        if (this.isSelectedChild1) {
-            this.statusChild1 = 'Selected';
-            const selectedEvent = new CustomEvent("childchange", {
-                detail: 1
-            });
-            this.dispatchEvent(selectedEvent);
-        } else {
-            this.statusChild1 = 'Deselected';
-            const selectedEvent = new CustomEvent("childchange", {
-                detail: -1
-            });
-            this.dispatchEvent(selectedEvent);
-        }
+        this.statusChild1 = this.isSelectedChild1 == true ? 'Selected' : 'Deselected';
+        var value = this.isSelectedChild1 == true ? 1 : -1;
+        const selectedEvent = new CustomEvent("childchange", {
+            detail: value
+        });
+        this.dispatchEvent(selectedEvent);
+
     }
     hanldeOnchild2Change(event) {
         this.isSelectedChild2 = event.detail;
-        if (this.isSelectedChild2) {
-            this.statusChild2 = 'Selected';
-            const selectedEvent = new CustomEvent("childchange", {
-                detail: 1
-            });
-            this.dispatchEvent(selectedEvent);
-        } else {
-            this.statusChild2 = 'Deselected';
-            const selectedEvent = new CustomEvent("childchange", {
-                detail: -1
-            });
-            this.dispatchEvent(selectedEvent);
-        }
+        this.statusChild2 = this.isSelectedChild2 == true ? 'Selected' : 'Deselected';
+        var value = this.isSelectedChild2 == true ? 1 : -1;
+        const selectedEvent = new CustomEvent("childchange", {
+            detail: value
+        });
+        this.dispatchEvent(selectedEvent);
     }
 }
