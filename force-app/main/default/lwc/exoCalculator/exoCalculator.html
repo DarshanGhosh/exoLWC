@@ -1,0 +1,59 @@
+<template>
+    <lightning-card title="Calculator" icon-name="standard:channel_programs">
+        <div class="slds-text-body_regular">Calc expression</div>
+        <div class="slds-text-body_regular">{expression}</div>
+        <div class="slds-text-body_regular">Result</div>
+        <div class="slds-text-body_regular">{result}</div>
+        <hr>
+        <div class="slds-grid slds-wrap slds-truncate_container_50">
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="1" onclick={handleNumber}>1</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="2" onclick={handleNumber}>2</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="3" onclick={handleNumber}>3</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_brand" value="+" onclick={handleOperator}>+</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="4" onclick={handleNumber}>4</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="5" onclick={handleNumber}>5</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="6" onclick={handleNumber}>6</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_brand" value="-" onclick={handleOperator}>-</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="7" onclick={handleNumber}>7</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="8" onclick={handleNumber}>8</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="9" onclick={handleNumber}>9</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_brand" value="*" onclick={handleOperator}>*</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_text-destructive" onclick={handleClear}>CLR</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_outline-brand" value="0" onclick={handleNumber}>0</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_success" onclick={handleEqual}>=</button>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <button class="slds-button slds-button_brand" value="/" onclick={handleOperator}>/</button>
+            </div>
+        </div>
+    </lightning-card>
+</template>
